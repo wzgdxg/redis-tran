@@ -1,0 +1,45 @@
+#服务容器相关配置 默认使用tomcat作为servlet容器，版本为8.5，所以不支持BIO。
+#Tomcat8中，会自动选取使用NIO或APR（如果找的到APR需要的本地库，则使用APR，否则使用NIO）
+#maxConnections：NIO的默认值是10000，APR/native的默认值是8192
+#因为选用了NIO或者APR所以maxConnections值应该远大于maxThreads
+server:
+  port: 8910
+  tomcat:
+    uri-encoding: utf-8
+
+logging:
+  file:
+    name: log/redis-tran.log
+    max-size: 50MB
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    com.hhdd: INFO
+#    org.apache.zookeeper: WARN
+  pattern:
+    console: '%level|%d{yyyyMMdd HH:mm:ss.SSS}|%thread|%logger{49}|%msg%n'
+    file: '%level|%d{yyyyMMdd HH:mm:ss.SSS}|%thread|%logger{49}|%msg%n'
+
+
+spring:
+  redis-multi-db:
+    databases:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+    host: 10.0.10.61
+    password: HZhhdd1209
+    port: 6379
+    timeout: 6000
+    shutdown-timeout: 6000
+    pool-max-active: 4
+    pool-max-wait: -1
+    pool-max-idle: 2
+    pool-min-idle: 0
+
